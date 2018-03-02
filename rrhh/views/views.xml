@@ -1,0 +1,141 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    
+    <record id="view_rrhh_form" model="ir.ui.view">
+            <field name="name">hr.employees.form.view</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='hr_settings']" position="after">
+                  <page name="funciones" string="Funciones">
+                    <group string = "Funciones">
+                          <field name="date_"/>
+                          <field name="date_string" string =" "/>
+                          <field name="date_number"/>
+                          <field name="relacc_ext" string ="Relaciones Externas" />
+                          <field name="relacc_in" string ="Relaciones Internas" widget="many2many_tags" options="{'no_create_edit': True}"/>
+                    </group>
+                    <group>
+                          <field name="func_general" placeholder="Descripcion General de la funcion a realizar"/>
+                          <field name="objti" placeholder="Objetivos a cumplir"/>
+                    </group>
+                  </page>
+                </xpath>
+                 <!--xpath expr="//page[@name='educacion']" position="after">
+                  <page name="funciones" string="Funciones">
+                    <group string = "Funciones">
+                    </group>
+                  </page>
+                </xpath-->
+                <xpath expr="//field[@name='address_home_id']" position="before">
+                        <field name="rtn" string ="RTN" />
+                        <field name="child" string ="Hijos?" />
+        <!--                <field name="edu" string ="Educación" />-->
+                        <field name="addrs" string ="Dirección" />
+                        <field name="salary" string ="Salario" />
+                        <field name="address_home_id" invisible="1"/>
+                        <field name="email_per" string ="Correo Personal" />    
+                        <field name="height_" string ="Estatura Mts." />    
+                        <field name="weight_" string ="Peso Lbs." />    
+        <!--                <field name="license" />
+                        <field name="type_license" string ="Tipo de Licencia" attrs="{'invisible':[('license','==',False)]}"/>
+                        <field name="car_" string =" " attrs="{'visible':[('type_license','==','1')]}"   />    
+                        <field name="camion_" string =" " attrs="{'visible':[('type_license','==','2')]}"   /> 
+                        <field name="number_license" string ="Numero de Licencia" attrs="{'invisible':[('license','==',False)]}"   />-->
+                      
+                </xpath>
+                <xpath  expr="//notebook/page[@name='personal_information']/group/group"   position="after">
+                    <group  string = "Vehiculo">
+                        <field name="license" string ="Licencia?"/>
+                        <field name="type_livi" string ="Liviana"  attrs="{'invisible':[('license','==',False)]}" />
+                        <field name="type_pesada" string ="Pesada" attrs="{'invisible':[('license','==',False)]}"/>
+                        <field name="number_license" string ="Numero de Licencia" placeholder ="Numero de Licencia" attrs="{'invisible':[('license','==',False)]}" />  
+                    </group>
+                </xpath>    
+                
+                <xpath expr="//field[@name='birthday']" position="before">
+                    <field name="age_" string ="Edad" />
+                </xpath>
+                <xpath  expr="//notebook/page[@name='personal_information']/group"  position="after">
+                  <group>
+                        <field name="fami_datails"  string="Datos Familiares" >
+                            <tree editable ="bottom" >
+                                   <field name="nombre_" string="Nombre" ></field>                            
+                                   <field name="addrs_fam" string="Dirección" ></field>                            
+                                   <field name="job" string="Ocupación ó Trabajo" ></field>                            
+                                   <field name="tel" string="Telefóno" ></field>                            
+                                   <field name="age" string="Edad" ></field>                            
+                                   <field name="paren" string="Parentesco" ></field>                            
+                            </tree>
+                        </field>
+
+                  </group>
+                  <group>
+                        <field name="studies_datails"  string="Datos de Estudios" >
+                            <tree editable ="bottom" >
+                                   <field name="edu" string="Estudio" ></field>                                                      
+                                   <field name="addrs_studi"></field>                                                      
+                                   <field name="nombre_studi"></field>                                                      
+                                   <field name="date_in"></field>                                                      
+                                   <field name="date_out"></field>
+                                   <field name="final" string="Finalizado?"></field>                                                      
+                            </tree>
+                        </field>
+
+                  </group>    
+                </xpath>
+                
+            </field>
+        </record>
+      
+      
+<!--    <record model="ir.actions.act_window" id="fami_datails_action_window">
+      <field name="name">Detalle</field>
+      <field name="res_model">info.family</field>
+      <field name="view_type">tree</field>
+      <field name="view_mode">tree</field>
+    </record> -->  
+
+    <!-- actions opening views on models -->
+    <!--
+    <record model="ir.actions.act_window" id="rrhh.action_window">
+      <field name="name">RRHH window</field>
+      <field name="res_model">rrhh.rrhh</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    -->
+
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="rrhh.action_server">
+      <field name="name">RRHH server</field>
+      <field name="model_id" ref="model_rrhh_rrhh"/>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    -->
+
+    <!-- Top menu item -->
+    <!--
+    <menuitem name="RRHH" id="rrhh.menu_root"/>
+    -->
+    <!-- menu categories -->
+    <!--
+    <menuitem name="Menu 1" id="rrhh.menu_1" parent="rrhh.menu_root"/>
+    <menuitem name="Menu 2" id="rrhh.menu_2" parent="rrhh.menu_root"/>
+    -->
+    <!-- actions -->
+    <!--
+    <menuitem name="List" id="rrhh.menu_1_list" parent="rrhh.menu_1"
+              action="rrhh.action_window"/>
+    <menuitem name="Server to list" id="rrhh" parent="rrhh.menu_2"
+              action="rrhh.action_server"/>
+    -->
+  </data>
+</odoo>
